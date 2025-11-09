@@ -52,6 +52,15 @@ namespace BetterClothes
                 .BeginSubCommand("reload")
                     .WithDescription("Reload all buffs in character inventory")
                     .HandleWith(BuffReloadCommand)
+                .EndSubCommand()
+                .BeginSubCommand("addbuffafteritemspawn")
+                    .WithDescription("Toggle buff application after item spawn [true/false]")
+                    .WithArgs(api.ChatCommands.Parsers.Bool("enabled"))
+                    .HandleWith(BuffAddAfterItemSpawnCommand)
+                .EndSubCommand()
+                .BeginSubCommand("removeall")
+                    .WithDescription("Remove all buffs in inventory, hotbar and character slots.")
+                    .HandleWith(BuffRemoveAllCommand)
                 .EndSubCommand();
         }
 
@@ -65,6 +74,15 @@ namespace BetterClothes
         private void OnSlotModified(EntityPlayer player, IInventory inventory) {
 
             BCMethods.UpdatePlayerStats(player, inventory);
+        }
+
+        private TextCommandResult BuffAddAfterItemSpawnCommand(TextCommandCallingArgs args)
+        {
+            bool enabled = (bool)args.Parsers[0].GetValue();
+
+            BCData.Config.AddBuffAfterItemSpawn = enabled;
+            BCOrchestrator.Api.StoreModConfig(BCData.Config, "betterclothes.json");
+            return TextCommandResult.Success($"AddBuffAfterItemSpawn {(enabled ? "enabled" : "disabled")}");
         }
 
         private TextCommandResult BuffAddCommand(TextCommandCallingArgs args)
@@ -157,6 +175,41 @@ namespace BetterClothes
 
             return TextCommandResult.Error("No items were buffed - check if items support buffs.");
         }
+
+
+        private TextCommandResult BuffRemoveAllCommand(TextCommandCallingArgs args)
+        {
+            IServerPlayer player = args.Caller.Player as IServerPlayer;
+
+            if (player.WorldData.CurrentGameMode != EnumGameMode.Creative)
+            {
+                return TextCommandResult.Error("This command requires Creative mode!");
+            }
+
+            string[] invCodes = new string[]
+            {
+                GlobalConstants.characterInvClassName,
+                GlobalConstants.backpackInvClassName,
+                GlobalConstants.hotBarInvClassName,
+            };
+
+            foreach (var invCode in invCodes)
+            {
+                IInventory inv = player.InventoryManager.GetOwnInventory(invCode);
+                foreach (var slot in inv)
+                {
+                    if (slot != null && !slot.Empty)
+                    {
+                        BCMethods.RemoveBuff(slot.Itemstack);
+                        slot.MarkDirty();
+                    }
+                }
+            }
+
+            PostBuff(player);
+            return TextCommandResult.Success("All buffs from inventory, character and hotbar slots have been removed.");
+        }
+
 
         private void PostBuff(IServerPlayer player)
         {

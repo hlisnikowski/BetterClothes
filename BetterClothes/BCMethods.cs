@@ -61,8 +61,7 @@ public static class BCMethods
     public static (BCBuff?, float) GetOrAdd(ItemStack itemstack, BuffType? type = null)
     {
         //  emblem, face etc.
-        var categoryCode = itemstack?.ItemAttributes["clothescategory"]?.ToString() ?? string.Empty;
-        if (categoryCode.IsEmpty() || itemstack == null) return (null, 0);
+        if (itemstack.IsNotValid(out string categoryCode)) return (null, 0);
 
         ITreeAttribute? buffAttr = itemstack.Attributes.GetTreeAttribute(BCData.BUFF_ATTRIBUTE_KEY);
 
@@ -91,8 +90,7 @@ public static class BCMethods
     /// </summary>
     public static (BCBuff?, float) GetBuffAndValue(ItemStack itemstack)
     {
-        var categoryCode = itemstack?.ItemAttributes["clothescategory"]?.ToString() ?? string.Empty;
-        if (categoryCode.IsEmpty() || itemstack == null) return (null, 0);
+        if (itemstack.IsNotValid(out string categoryCode)) return (null, 0);
 
         ITreeAttribute? buffAttr = itemstack.Attributes.GetTreeAttribute(BCData.BUFF_ATTRIBUTE_KEY);
         if (buffAttr == null) return (null, 0);
@@ -119,11 +117,7 @@ public static class BCMethods
     /// </summary>
     public static bool CanAddBuff(ItemStack itemstack)
     {
-        if (itemstack == null || itemstack?.ItemAttributes == null) return false;
-
-        var categoryCode = itemstack.ItemAttributes["clothescategory"]?.ToString() ?? string.Empty;
-        if (categoryCode.IsEmpty()) return false;
-
+        if (itemstack.IsNotValid(out string categoryCode)) return false;
         ITreeAttribute? buffAttr = itemstack.Attributes.GetTreeAttribute(BCData.BUFF_ATTRIBUTE_KEY);
         if (buffAttr != null) return false;
         var buff = BCData.GetBuff(categoryCode);
@@ -144,9 +138,7 @@ public static class BCMethods
     /// </summary>
     public static bool RemoveBuff(ItemStack itemstack)
     {
-        var categoryCode = itemstack?.ItemAttributes["clothescategory"]?.ToString() ?? string.Empty;
-        if (categoryCode.IsEmpty() || itemstack == null) return false;
-
+        if (itemstack.IsNotValid(out string categoryCode)) return false;
         itemstack.Attributes.RemoveAttribute(BCData.BUFF_ATTRIBUTE_KEY);
         return true;
     }
@@ -182,6 +174,17 @@ public static class BCMethods
             foreach (var key in stat.Value)
                 player.Stats.Set(key, BCData.STATS_BUFF_ATTRIBUTE_KEY, 0);
         }
+    }
+
+
+    private static bool IsNotValid(this ItemStack itemstack, out string categoryCode)
+    {
+        categoryCode = string.Empty;
+        if (itemstack == null || itemstack?.ItemAttributes == null) return true;
+        categoryCode = itemstack.ItemAttributes["clothescategory"]?.ToString() ?? string.Empty;
+        if (categoryCode.IsEmpty()) return true;
+
+        return false;
     }
 
     #region STATS SETTERS
