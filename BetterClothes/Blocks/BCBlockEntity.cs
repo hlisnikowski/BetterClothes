@@ -63,7 +63,7 @@ public class BCBlockEntity : BlockEntityOpenableContainer
                ((IServerPlayer)player).SendMessage(GlobalConstants.GeneralChatGroup, $"{BCMethods.Translate("message-buff-add-success")} {buff.GetName()} ", EnumChatType.CommandSuccess);
             }
             slot1.MarkDirty();
-            slot2.TakeOut(1);
+            slot2.TakeOut(BCData.Config.BuffCostQty);
             slot2.MarkDirty();
             AssetLocation sound = new AssetLocation("sounds/tool/reinforce");
             Api.World.PlaySoundAt(sound, Pos.X, Pos.Y, Pos.Z, null);
