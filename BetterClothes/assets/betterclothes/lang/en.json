@@ -1,0 +1,16 @@
+{
+  "hello": "hello world!",
+  "game:tabname-betterclothes": "Beter Clothes Mod",
+  "health": "Health",
+  "walkspeed": "Walk speed",
+  "luck": "Luck",
+  "hunger": "Hunger",
+  "damage": "Damage",
+  "mining": "Mining speed",
+  "farming": "Farming",
+  "durability": "Durability",
+  "block-bufftable-north": "Cursed Table",
+  "block-bufftable-north-desc": "Countless dark magical experiments were conducted upon this table. This table really likes some clothes and {0}.",
+  "change-btn": "Change",
+  "message-buff-add-success": "New buff has been added:"
+}

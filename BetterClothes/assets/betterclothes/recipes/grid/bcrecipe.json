@@ -1,0 +1,28 @@
+{
+  "ingredientPattern": "PLP,PGP,PMP",
+  "ingredients": {
+    "P": {
+      "type": "block",
+      "code": "game:plank-*"
+    },
+    "L": {
+      "type": "block",
+      "code": "game:linen-normal-down"
+    },
+    "G": {
+      "type": "item",
+      "code": "game:gear-temporal"
+    },
+    "M": {
+      "type": "block",
+      "code": "game:metal-scraps"
+    }
+  },
+  "width": 3,
+  "height": 3,
+  "output": {
+    "type": "block",
+    "code": "betterclothes:bufftable-north",
+    "quantity": 1
+  }
+}

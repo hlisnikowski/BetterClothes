@@ -1,0 +1,14 @@
+{
+    "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
+    "type": "Code",
+    "modid": "betterclothes",
+    "name": "BetterClothes",
+    "authors": [
+        "EnchikO"
+    ],
+    "description": "Adds buffs to clothes.",
+    "version": "1.0.0",
+    "dependencies": {
+        "game": "1.21.0"
+    }
+}

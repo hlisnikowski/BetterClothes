@@ -1,0 +1,72 @@
+{
+  "code": "bufftable",
+  "class": "BCBlock",
+  "entityClass": "BCBlockEntity",
+  "creativeinventorybytype": {
+    "*-north": {
+      "general": [ "*" ],
+      "betterclothes": [ "*" ]
+    }
+  },
+  "variantgroups": [
+    {
+      "code": "side",
+      "states": [ "north", "east", "south", "west" ]
+    }
+  ],
+  "drawtype": "Cube",
+  "texturesbytype": {
+    "*-north": {
+      "up": { "base": "block/bctop", "rotation" :  180 },
+      "down": { "base": "block/bcbot", "rotation" : 180 },
+      "north": { "base": "block/bcside1"},
+      "south": { "base": "block/bcside1" },
+      "east": { "base": "block/bcside2" },
+      "west": { "base": "block/bcside2" }
+    },
+    "*-east": {
+      "up": {
+        "base": "block/bctop",
+        "rotation": 90
+      },
+      "down": {
+        "base": "block/bcbot",
+        "rotation": 90
+      },
+      "north": { "base": "block/bcside2" },
+      "south": { "base": "block/bcside2" },
+      "east": { "base": "block/bcside1" },
+      "west": { "base": "block/bcside1" }
+    },
+    "*-south": {
+      "up": {
+        "base": "block/bctop"
+      },
+      "down": {
+        "base": "block/bcbot"
+      },
+      "north": { "base": "block/bcside1" },
+      "south": { "base": "block/bcside1" },
+      "east": { "base": "block/bcside2" },
+      "west": { "base": "block/bcside2" }
+    },
+    "*-west": {
+      "up": {
+        "base": "block/bctop",
+        "rotation": 270
+      },
+      "down": {
+        "base": "block/bcbot",
+        "rotation": 270
+      },
+      "north": { "base": "block/bcside2" },
+      "south": { "base": "block/bcside2" },
+      "east": { "base": "block/bcside1" },
+      "west": { "base": "block/bcside1" }
+    }
+  },
+  "behaviors": [
+    { "name": "HorizontalOrientable" }
+  ]
+
+}
