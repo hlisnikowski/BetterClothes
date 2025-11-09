@@ -65,7 +65,7 @@ namespace BetterClothes
         Mining,     // miningSpeedMul
         Luck,       // vesselContentsDropRate, rustyGearDropRate, animalLootDropRate
         Damage,     // meeleWeaponsDamage, rangedWeaponsDamage 
-        Farming,    // wildCropDropRate, forageDropRate, animalLootDropRate
+        Farming,    // wildCropDropRate, forageDropRate, wildCropDropRate
         Durability, // armorDurabilityLoss, armorWalkSpeedAffectedness
         // NOTE: oreDropRate is useless since more than 100% != more ore drop...
     }
