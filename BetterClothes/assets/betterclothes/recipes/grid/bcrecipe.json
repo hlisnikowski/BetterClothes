@@ -2,7 +2,7 @@
   "ingredientPattern": "PLP,PGP,PMP",
   "ingredients": {
     "P": {
-      "type": "block",
+      "type": "item",
       "code": "game:plank-*"
     },
     "L": {
