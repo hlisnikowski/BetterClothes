@@ -24,7 +24,7 @@ namespace BetterClothes
         /// <summary>
         /// Gets buff data by category name. If <paramref name="type"/> is null, gets random buff. 
         /// </summary>
-        /// <param name="key">ItemWearable clothescategory name.</param>
+        /// <param name="key"><see cref="Extensions.IsWearable(Vintagestory.API.Common.ItemSlot)"> clothescategory name.</param>
         public static BCBuff? GetBuff(string key, BuffType? type = null)
         {
             if (!Buffs.TryGetValue(key, out var buffs) || buffs == null || buffs.Count == 0) {

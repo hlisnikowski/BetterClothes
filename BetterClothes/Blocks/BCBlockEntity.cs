@@ -32,16 +32,16 @@ public class BCBlockEntity : BlockEntityOpenableContainer
             _inventory = new InventoryGeneric(2, InventoryClassName + "-0", null);
         }
 
-        bigMetalSparks = new SimpleParticleProperties(
-    20, 25,
-    ColorUtil.ToRgba(255, 255, 233, 83),
-    new Vec3d(), new Vec3d(),
-    new Vec3f(-1f, 1f, -1f),
-    new Vec3f(2f, 4f, 2f),
-    0.4f,
-    1f,
-    0.25f, 0.8f
-);
+        bigMetalSparks = new (
+            20, 25,
+            ColorUtil.ToRgba(255, 255, 233, 83),
+            new Vec3d(), new Vec3d(),
+            new Vec3f(-1f, 1f, -1f),
+            new Vec3f(2f, 4f, 2f),
+            0.4f,
+            1f,
+            0.25f, 0.8f
+        );
         bigMetalSparks.VertexFlags = 128;
         bigMetalSparks.AddPos.Set(1 / 16f, 0, 1 / 16f);
         bigMetalSparks.SizeEvolve = new EvolvingNatFloat(EnumTransformFunction.LINEAR, -0.25f);
@@ -80,8 +80,7 @@ public class BCBlockEntity : BlockEntityOpenableContainer
 
     private void SpawnParticles()
     {
-        Vec3d center = new Vec3d(Pos.X + 0.5, Pos.Y + 0, Pos.Z + 0.5);
-        Random rand = Api.World.Rand;
+        Vec3d center = new(Pos.X + 0.5, Pos.Y + 0, Pos.Z + 0.5);
         bigMetalSparks.MinPos = center.AddCopy(0, 1f, 0);
         bigMetalSparks.AddPos.Set(1 / 16f, 0, 1 / 16f);
         bigMetalSparks.VertexFlags = (byte)GameMath.Clamp((int)(800 - 700) / 2, 32, 128);

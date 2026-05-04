@@ -30,7 +30,7 @@ public sealed class ModConfig
     public List<BuffConfig> Buffs { get; set; } = [];
 
     /// <summary>
-    /// ItemWearable > Attributes.clothescategory codes and which <see cref="Buffs"/> can be applied based on <see cref="BuffType"/>.
+    /// <see cref="Extensions.IsWearable(Vintagestory.API.Common.ItemSlot)"> > Attributes.clothescategory codes and which <see cref="Buffs"/> can be applied based on <see cref="BuffType"/>.
     /// </summary>
     public List<ClothesCategory> ClothesCategories { get; set; } = [];
 
@@ -196,7 +196,7 @@ public class BuffConfig
 public class ClothesCategory
 {
     /// <summary>
-    /// This is a code of ItemWearable > attributes.clothescategory
+    /// This is a code of <see cref="Extensions.IsWearable(Vintagestory.API.Common.ItemSlot)""> > attributes.clothescategory
     /// </summary>
     public string Name { get; set; } = "";
 

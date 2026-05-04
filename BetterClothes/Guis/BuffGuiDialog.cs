@@ -67,7 +67,7 @@ internal class BuffGuiDialog : GuiDialogBlockEntity
         ItemSlot slot2 = Inventory[1];
 
         if (slot2.Empty) return true;
-        if (slot1.Empty || slot1.Itemstack.Collectible is not ItemWearable) return true;
+        if (slot1.Empty || !slot1.IsWearable()) return true;
         if (slot2.Itemstack.Collectible.Code.Path != BCData.Config.BuffCostCode) return true;
         if (slot2.StackSize < BCData.Config.BuffCostQty) return true;
 

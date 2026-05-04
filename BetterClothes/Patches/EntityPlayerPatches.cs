@@ -26,7 +26,7 @@ namespace BetterClothes.Patches
                     if (charInv == null) return;
                     foreach (ItemSlot slot in charInv)
                     {
-                        if (slot?.Itemstack?.Collectible is ItemWearable i)
+                        if (slot.IsWearable())
                         {
                             float walkSpeedLevel = BCMethods.GetBuffByType(slot.Itemstack, BuffType.WalkSpeed);
                             if (walkSpeedLevel > 0)
@@ -56,9 +56,9 @@ namespace BetterClothes.Patches
         public static void GetHeldItemInfo_Postfix(CollectibleObject __instance,
             ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
         {
-            if (inSlot?.Itemstack?.Collectible is ItemWearable && inSlot.Itemstack != null)
+            if (inSlot.IsWearable())
             {
-                var (buff, val) = BCMethods.GetBuffAndValue(inSlot.Itemstack);
+                (BCBuff? buff, float val) = BCMethods.GetBuffAndValue(inSlot.Itemstack);
                 if (val != 0 && buff != null)
                 {
                     bool isMax = BCMethods.HasBuffMaxValue(buff, val);
