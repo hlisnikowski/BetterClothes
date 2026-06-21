@@ -1,6 +1,7 @@
 ﻿using BetterClothes.Blocks;
 using BetterClothes.Config;
 using HarmonyLib;
+using System.Linq;
 using System.Reflection;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -22,6 +23,13 @@ namespace BetterClothes
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
+
+            // Let traders and stack-merging treat buffed items as normal goods (ignore the buff attribute when comparing stacks)
+            if (!GlobalConstants.IgnoredStackAttributes.Contains(BCData.BUFF_ATTRIBUTE_KEY))
+            {
+                GlobalConstants.IgnoredStackAttributes =
+                    GlobalConstants.IgnoredStackAttributes.Append(BCData.BUFF_ATTRIBUTE_KEY).ToArray();
+            }
 
             if (!Harmony.HasAnyPatches(Mod.Info.ModID))
             {
